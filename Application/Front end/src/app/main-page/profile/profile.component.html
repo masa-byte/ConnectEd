@@ -1,0 +1,135 @@
+<div class="profile">
+  <div class="centeredDiv">
+    <div class="profile-picture" *ngIf="typeOfProfile !== 'faculty'">
+      <img [src]="svg" alt="Profile Image" />
+    </div>
+    <div class="profile-picture" *ngIf="typeOfProfile === 'faculty'">
+      <img src="../../../assets/facultyBackground.jpg" alt="Profile Image" />
+    </div>
+    <div class="profile-names">
+      <h2>{{ profileToDisplay.name + " " }}</h2>
+      <h2 *ngIf="typeOfProfile !== 'faculty'">
+        {{ profileToDisplay.surname }}
+      </h2>
+    </div>
+  </div>
+  <div class="profile-details">
+    <div class="profile-row" *ngIf="typeOfProfile !== 'faculty'">
+      <span class="profile-label">Username:</span>
+      <span>{{ profileToDisplay.username }}</span>
+    </div>
+    <div class="profile-row" *ngIf="typeOfProfile !== 'faculty'">
+      <span class="profile-label">Faculty:</span>
+      <span>{{ profileToDisplay.faculty }}</span>
+    </div>
+    <div class="profile-row" *ngIf="typeOfProfile === 'student'">
+      <span class="profile-label">Degree Level:</span>
+      <span>{{ profileToDisplay.degreeLevel }}</span>
+    </div>
+    <div class="profile-row" *ngIf="typeOfProfile === 'facultyMember'">
+      <span class="profile-label">Academic Title:</span>
+      <span>{{ profileToDisplay.academicTitle }}</span>
+    </div>
+    <div class="profile-row" *ngIf="typeOfProfile === 'faculty'">
+      <span class="profile-label">University:</span>
+      <span>{{ profileToDisplay.university }}</span>
+    </div>
+    <div class="profile-row">
+      <span class="profile-label">Address:</span>
+      <span>{{ profileToDisplay.address }}</span>
+    </div>
+    <div class="profile-row">
+      <span class="profile-label">Phone Number:</span>
+      <span>{{ profileToDisplay.phoneNumber }}</span>
+    </div>
+    <div class="profile-row" *ngIf="typeOfProfile !== 'faculty'">
+      <span class="profile-label">Experience:</span>
+      <span>{{ profileToDisplay.experience }}</span>
+    </div>
+    <div class="profile-row">
+      <span class="profile-label">Description:</span>
+      <span>{{ profileToDisplay.description }}</span>
+    </div>
+    <div class="profile-row" *ngIf="typeOfProfile !== 'faculty'">
+      <span class="profile-label">Average rating</span>
+      <span>{{ averageRating | number : "1.2-2" }}</span>
+    </div>
+  </div>
+
+  <div class="interests-section">
+    <h3>
+      {{ isViewProfile ? "Interests:" : "Tell us about your interests:" }}
+    </h3>
+    <ul class="interests-list">
+      <li *ngFor="let tag of profileToDisplay.tags">{{ tag.text }}</li>
+    </ul>
+  </div>
+  <div *ngIf="!isViewProfile" class="edit">
+    <div class="edit-profile">
+      <button
+        type="button"
+        aria-label="Delete profile"
+        (click)="deleteProfile()"
+        mat-raised-button
+        class="edit-button"
+      >
+        Delete profile
+        <mat-icon aria-label="Delete icon">delete</mat-icon>
+      </button>
+    </div>
+    <div class="edit-profile">
+      <button
+        type="button"
+        aria-label="Edit tags"
+        (click)="editTags()"
+        mat-raised-button
+        class="edit-button"
+      >
+        Edit tags
+        <mat-icon aria-label="Edit icon">edit</mat-icon>
+      </button>
+    </div>
+    <div class="edit-profile">
+      <button
+        type="button"
+        aria-label="Edit profile"
+        (click)="editProfile()"
+        mat-raised-button
+        class="edit-button"
+      >
+        Edit profile
+        <mat-icon aria-label="Edit icon">edit</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="centered-sub-btn" *ngIf="!isMe">
+    <div *ngIf="isViewProfile && !amSubscribed; else showUnsubscribe">
+      <button
+        type="button"
+        aria-label="Subscribe"
+        (click)="subscribeToUser()"
+        mat-raised-button
+        class="edit-button"
+      >
+        Subscribe
+        <mat-icon aria-label="Subscribe icon">person_add</mat-icon>
+      </button>
+    </div>
+    <ng-template #showUnsubscribe>
+      <button
+        type="button"
+        aria-label="Unsubscribe"
+        (click)="unsubscribeFromUser()"
+        mat-raised-button
+        class="edit-button"
+      >
+        Unsubscribe
+        <mat-icon aria-label="Unsubscribe icon">person_add_disabled</mat-icon>
+      </button>
+    </ng-template>
+  </div>
+</div>
+
+<app-background-canvas
+  *ngIf="backgroundService.getBackgroundStatus()"
+></app-background-canvas>

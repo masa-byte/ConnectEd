@@ -1,0 +1,81 @@
+<div class="search-filter-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput [(ngModel)]="searchText" placeholder="Search" />
+    <button mat-button matSuffix (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-button matPrefix [matMenuTriggerFor]="filterMenu">
+      <mat-icon>filter_list</mat-icon>
+      Filters
+    </button>
+  </mat-form-field>
+
+  <mat-menu #filterMenu="matMenu">
+    <div class="menu-group">
+      <h3>Sort by</h3>
+      <mat-radio-group
+        [(ngModel)]="selectedOption"
+        aria-label="Select an option"
+      >
+        <mat-radio-button (click)="$event.stopPropagation()" value="1"
+          >Number of articles asc</mat-radio-button
+        >
+        <mat-radio-button (click)="$event.stopPropagation()" value="2"
+          >Number of articles desc</mat-radio-button
+        >
+        <mat-radio-button (click)="$event.stopPropagation()" value="3"
+          >Rating</mat-radio-button
+        >
+        <mat-radio-button (click)="$event.stopPropagation()" value="4"
+          >Default</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="menu-group">
+      <h3>Profile type</h3>
+      <mat-checkbox
+        [(ngModel)]="filters.student"
+        (click)="$event.stopPropagation()"
+        >Student</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="filters.facultyMember"
+        (click)="$event.stopPropagation()"
+        >Faculty member</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="filters.faculty"
+        (click)="$event.stopPropagation()"
+        >Faculty</mat-checkbox
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <div class="menu-group">
+      <h3>Tag search</h3>
+      <form>
+        <mat-form-field class="tags-input" (click)="$event.stopPropagation()">
+          <mat-label>Tags</mat-label>
+          <input
+            type="text"
+            placeholder="Search tags"
+            aria-label="Number"
+            matInput
+            [matAutocomplete]="auto"
+            [formControl]="myControl"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+              {{ tag }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+    <mat-divider></mat-divider>
+    <button class="applyFilters" mat-button (click)="search()">
+      Apply Filters
+    </button>
+  </mat-menu>
+</div>

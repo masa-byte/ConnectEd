@@ -1,0 +1,108 @@
+.sidenav-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav {
+  width: 200px;
+  background: linear-gradient(to right, #ccd3db, #f5f7f8);
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+  padding-top: 20px;
+  padding-left: 25px;
+}
+
+.mat-toolbar {
+  font-size: 250%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-sidenav-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+.right-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.right-group button {
+  margin-right: 2%;
+  margin-top: 5px;
+}
+
+.mat-icon-button {
+  display: inline;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.menu-items {
+  padding: 16px;
+  flex: auto;
+  align-items: flex-start;
+}
+.menu-checkbox {
+  padding-left: 10px;
+  padding-bottom: 16px;
+}
+.menu-items mat-nav-list {
+  border-top: 1px solid #a9a9a9;
+  border-bottom: 1px solid #a9a9a9;
+  margin-top: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.menu-items mat-list-item {
+  border: 1px solid #a9a9a9;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-actions {
+  padding: 16px;
+  padding-top: 0px;
+  flex: auto;
+  align-items: flex-start;
+}
+
+.profile-actions mat-nav-list {
+  border-top: 1px solid #a9a9a9;
+  border-bottom: 1px solid #a9a9a9;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  width: 100%;
+}

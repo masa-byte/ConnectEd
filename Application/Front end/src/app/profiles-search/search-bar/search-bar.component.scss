@@ -1,0 +1,31 @@
+.search-filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+mat-form-field {
+  margin: 10px;
+  width: 100%;
+}
+
+mat-icon {
+  font-size: 24px;
+  color: #666;
+}
+
+h3 {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.applyFilters {
+  margin-left: 5px;
+  margin-top: 5px;
+  background-color: #c2dae8 !important;
+}
+
+.tags-input {
+  width: 93% !important;
+}

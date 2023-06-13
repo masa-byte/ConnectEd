@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="main-div">
+    <h2>Sign Up</h2>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [(ngModel)]="email"
+        required="true"
+        #emailInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        required="true"
+        [type]="hidePassword ? 'password' : 'text'"
+        name="password"
+        [(ngModel)]="password"
+        #passwordInput="ngModel"
+      />
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Type</mat-label>
+      <mat-select [(ngModel)]="type" required="true" #typeInput="ngModel">
+        <mat-option value="student">Student</mat-option>
+        <mat-option value="facultyMember">Faculty Member</mat-option>
+        <mat-option value="faculty">Faculty</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="rememberMe">Remember me</mat-checkbox>
+    <div class="button-container">
+      <button mat-raised-button class="btn" (click)="signIn()">Sign In</button>
+      <button
+        mat-raised-button
+        class="btn"
+        (click)="signUp()"
+        [disabled]="
+          !emailInput.valid || !passwordInput.valid || !typeInput.valid
+        "
+      >
+        Sign Up
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-background-canvas></app-background-canvas>

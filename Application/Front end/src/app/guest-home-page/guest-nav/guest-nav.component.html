@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div class="left-group">
+        <span style="cursor: pointer" appOnHoverDirective [bold]="true">
+          ConnectEd
+        </span>
+      </div>
+      <div class="right-group">
+        <button
+          mat-raised-button
+          class="btn"
+          aria-label="My appliactions"
+          (click)="signIn()"
+        >
+          Sign In
+        </button>
+        <button
+          mat-raised-button
+          class="btn"
+          aria-label="My subscriptions"
+          (click)="signUp()"
+        >
+          Sign up
+        </button>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+    <app-display-articles [isGuest]="true"></app-display-articles>
+    <app-background-canvas
+      *ngIf="backgroundService.getBackgroundStatus()"
+    ></app-background-canvas>
+  </mat-sidenav-content>
+</mat-sidenav-container>

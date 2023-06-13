@@ -1,0 +1,6 @@
+<app-search [isViewProfile]="isViewProfile" [isGuest]="isGuest"></app-search>
+<div *ngIf="articlesToDisplay as articles" cols="2" rowHeight="2:1">
+  <div *ngFor="let article of articles">
+    <app-article [articleToDisplay]="article" [isGuest]="isGuest"></app-article>
+  </div>
+</div>

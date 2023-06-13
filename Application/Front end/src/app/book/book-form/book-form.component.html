@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="main-div">
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        [(ngModel)]="book.title"
+        required="true"
+        #titleInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Topic</mat-label>
+      <input
+        matInput
+        [(ngModel)]="book.topic"
+        required="true"
+        #topicInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="book.description"
+        required="true"
+        #descriptionInput="ngModel"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Contributors</mat-label>
+      <input
+        type="number"
+        matInput
+        [(ngModel)]="book.contributors"
+        required="true"
+        #contributorsInput="ngModel"
+      />
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button class="btn" (click)="cancel()">Cancel</button>
+      <button
+        mat-raised-button
+        class="btn"
+        (click)="createOrUpdateBook()"
+        [disabled]="
+          !titleInput.valid ||
+          !topicInput.valid ||
+          !descriptionInput.valid ||
+          !contributorsInput.valid
+        "
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-background-canvas
+  *ngIf="backgroundService.getBackgroundStatus()"
+></app-background-canvas>

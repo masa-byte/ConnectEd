@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="main-div">
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Name</mat-label>
+      <input
+        [(ngModel)]="facultyMember.name"
+        required="true"
+        #nameInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Surname</mat-label>
+      <input
+        [(ngModel)]="facultyMember.surname"
+        required="true"
+        #surnameInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Address</mat-label>
+      <input
+        [(ngModel)]="facultyMember.address"
+        required="true"
+        #addressInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Username</mat-label>
+      <input
+        [(ngModel)]="facultyMember.username"
+        required="true"
+        #usernameInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Phone number</mat-label>
+      <input
+        [(ngModel)]="facultyMember.phoneNumber"
+        required="true"
+        #phoneInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Faculty</mat-label>
+      <input
+        [(ngModel)]="facultyMember.faculty"
+        required="true"
+        #facultyInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Academic title</mat-label>
+      <mat-select
+        [(ngModel)]="facultyMember.academicTitle"
+        required="true"
+        #titleInput="ngModel"
+      >
+        <mat-option value="Instructor">Instructor</mat-option>
+        <mat-option value="Assistant Professor">Assistant Professor</mat-option>
+        <mat-option value="Associate Professor">Associate Professor</mat-option>
+        <mat-option value="Full Professor">Full Professor</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Experience</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="facultyMember.experience"
+        required="true"
+        #experienceInput="ngModel"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="facultyMember.description"
+        required="true"
+        #descriptionInput="ngModel"
+      ></textarea>
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-raised-button class="btn" (click)="back()">Back</button>
+      <button
+        mat-raised-button
+        class="btn"
+        (click)="createProfile()"
+        [disabled]="
+          !nameInput.valid ||
+          !surnameInput.valid ||
+          !addressInput.valid ||
+          !usernameInput.valid ||
+          !phoneInput.valid ||
+          !facultyInput.valid ||
+          !titleInput.valid ||
+          !experienceInput.valid ||
+          !descriptionInput.valid
+        "
+      >
+        {{ isEditing ? "Save Changes" : "Create Profile" }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-background-canvas></app-background-canvas>

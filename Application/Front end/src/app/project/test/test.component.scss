@@ -1,0 +1,24 @@
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 2% auto;
+}
+
+.field {
+  width: 100%;
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 35%;
+  background-color: #3f3c99 !important;
+  color: white !important;
+}

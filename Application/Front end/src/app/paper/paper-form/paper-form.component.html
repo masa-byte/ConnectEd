@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="main-div">
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input
+        required
+        [(ngModel)]="paper.title"
+        #titleInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Topic</mat-label>
+      <input
+        required
+        [(ngModel)]="paper.topic"
+        #topicInput="ngModel"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        required
+        [(ngModel)]="paper.description"
+        #descriptionInput="ngModel"
+        matInput
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Contributors</mat-label>
+      <input
+        required
+        [(ngModel)]="paper.contributors"
+        #contributorsInput="ngModel"
+        type="number"
+        matInput
+      />
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-raised-button class="btn" (click)="cancel()">Cancel</button>
+      <button
+        mat-raised-button
+        class="btn"
+        [disabled]="
+          !titleInput.valid ||
+          !topicInput.valid ||
+          !descriptionInput.valid ||
+          !contributorsInput.valid
+        "
+        (click)="createOrUpdatePaper()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-background-canvas
+  *ngIf="backgroundService.getBackgroundStatus()"
+></app-background-canvas>

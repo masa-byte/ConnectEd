@@ -1,0 +1,25 @@
+<div>
+  <div *ngFor="let application of myUngradedApplications">
+    <div *ngIf="bookTypeGuard(application)">
+      <app-article
+        (invokeChangeInGradeColleagues)="getUngradedApplications($event)"
+        [articleToDisplay]="application.book"
+      ></app-article>
+    </div>
+    <div *ngIf="paperTypeGuard(application)">
+      <app-article
+        (invokeChangeInGradeColleagues)="getUngradedApplications($event)"
+        [articleToDisplay]="application.paper"
+      ></app-article>
+    </div>
+    <div *ngIf="projectTypeGuard(application)">
+      <app-article
+        (invokeChangeInGradeColleagues)="getUngradedApplications($event)"
+        [articleToDisplay]="application.project"
+      ></app-article>
+    </div>
+  </div>
+</div>
+<app-background-canvas
+  *ngIf="backgroundService.getBackgroundStatus()"
+></app-background-canvas>

@@ -1,0 +1,99 @@
+<mat-card
+  class="example-card"
+  [ngClass]="
+    articleToDisplay.closed && !isGradeColleagues ? 'closed-article' : ''
+  "
+>
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      [ngClass]="
+        typeOfArticleToDisplay === 'project'
+          ? 'project-icon'
+          : typeOfArticleToDisplay === 'book'
+          ? 'book-icon'
+          : 'paper-icon'
+      "
+    ></div>
+    <mat-card-title
+      appOnHoverDirective
+      class="cursor-pointer"
+      [hoverTextColor]="'#3f51b5'"
+      [underline]="true"
+      (click)="viewProfile()"
+      >{{ owner.name }} {{ owner.surname }}</mat-card-title
+    >
+    <mat-card-subtitle>{{
+      typeOfArticleToDisplay | uppercase
+    }}</mat-card-subtitle>
+    <button
+      [disabled]="articleToDisplay.closed === true"
+      *ngIf="isOwnedByMe"
+      class="example-header-button"
+      mat-icon-button
+      color="basic"
+      (click)="editArticle()"
+    >
+      <mat-icon>create</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content
+    *ngIf="typeOfArticleToDisplay === 'project'; else notProject"
+  >
+    <p><em>Name:</em> {{ articleToDisplay.name }}</p>
+    <p><em>Project type:</em> {{ articleToDisplay.type }}</p>
+    <p><em>Description:</em> {{ articleToDisplay.description }}</p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <ng-template #notProject>
+    <mat-card-content>
+      <p><em>Title:</em> {{ articleToDisplay.title }}</p>
+      <p><em>Topic:</em> {{ articleToDisplay.topic }}</p>
+      <p><em>Description:</em> {{ articleToDisplay.description }}</p>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+  </ng-template>
+  <mat-card-actions *ngIf="!isGuest">
+    <section class="example-section" *ngIf="!isOwnedByMe; else notOwnedByMe">
+      <button
+        [disabled]="isMyApplications || articleToDisplay.closed === true"
+        class="example-float-left"
+        mat-button
+        (click)="applyForArticle()"
+      >
+        APPLY
+      </button>
+      <button
+        [disabled]="!isGradeColleagues"
+        [ngClass]="
+          isGradeColleagues ? 'example-float-right' : 'visibility-none'
+        "
+        class="example-float-right"
+        mat-button
+        (click)="gradeColleagues()"
+      >
+        GRADE COLLEAGUES
+      </button>
+    </section>
+    <ng-template #notOwnedByMe>
+      <section class="example-section">
+        <button
+          [disabled]="articleToDisplay.closed === true"
+          class="example-float-left"
+          mat-button
+          (click)="reviewArticle()"
+        >
+          REVIEW
+        </button>
+        <button
+          [disabled]="articleToDisplay.closed === true"
+          class="example-float-right"
+          mat-button
+          (click)="scheduleMeeting()"
+        >
+          SCHEDULE MEETING
+        </button>
+      </section>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>

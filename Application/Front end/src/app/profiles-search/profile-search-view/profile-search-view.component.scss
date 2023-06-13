@@ -1,0 +1,94 @@
+.example-card {
+  max-width: 100%;
+  margin: 8px;
+}
+
+button {
+  z-index: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.example-header-button {
+  display: inline;
+  float: right !important;
+  margin-left: auto;
+}
+
+.example-section {
+  display: inline-block;
+  width: 100%;
+}
+
+.example-float-left {
+  display: inline;
+  float: left !important;
+}
+
+.example-float-right {
+  display: inline;
+  float: right !important;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-vertically-aligned {
+  vertical-align: middle;
+}
+
+.interests-section h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.interests-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.interests-list li {
+  font-size: 15px;
+  font-weight: 500;
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: rgb(215 215 215 / 87%);
+  border-radius: 5px;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-row span {
+  font-size: 18px;
+  flex-grow: 1;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.profile-label {
+  text-align: left !important;
+  font-weight: bold;
+  margin-right: 10px;
+  padding-top: 5px;
+}

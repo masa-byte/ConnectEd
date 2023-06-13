@@ -1,0 +1,76 @@
+.dialog-header{
+  color:#3f51b5;
+}
+mat-dialog-content{
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  //position: absolute;
+}
+table {
+    width: 100%;
+    //margin: 30px auto;
+    overflow: auto;
+    border:2px solid #3f51b5;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: rgb(193, 194, 221);
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: whitesmoke;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    min-width: 80px;
+    width:30%;
+    border: 2px solid rgb(193, 194, 221);
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+  
+  .example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+  }
+  
+  .example-element-description {
+    //padding: 16px;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    width:35%;
+    border: 2px solid rgb(193, 194, 221);
+  }
+  .example-element-tag{
+    //width: 35%;
+    //border: 2px solid rgb(205, 177, 218);
+    padding: 5px;
+    margin: 8px 0;
+  }
+  
+  .example-element-description-attribution {
+    opacity: 0.5;
+  }
+  
+  .endButton{
+    border-radius: 5px;
+    border: 2px solid #3f51b5;
+  }

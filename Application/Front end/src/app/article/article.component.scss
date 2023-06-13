@@ -1,0 +1,60 @@
+.example-card {
+  max-width: 100%;
+  margin: 8px;
+}
+
+.closed-article {
+  background-color: rgb(216, 216, 216);
+}
+
+p {
+  margin: 10px;
+}
+
+button {
+  z-index: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.example-header-button {
+  display: inline;
+  float: right !important;
+  margin-left: auto;
+}
+
+.example-section {
+  display: inline-block;
+  width: 100%;
+}
+
+.example-float-left {
+  display: inline;
+  float: left !important;
+}
+
+.example-float-right {
+  display: inline;
+  float: right !important;
+}
+
+.book-icon {
+  background-image: url("https://img.uxwing.com/wp-content/themes/uxwing/download/editing-user-action/read-book-icon.svg");
+  background-size: contain;
+}
+
+.project-icon {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Noun_Project_projects_icon_1327109_cc.svg/1024px-Noun_Project_projects_icon_1327109_cc.svg.png");
+  background-size: contain;
+}
+
+.paper-icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/8332/8332640.png");
+  background-size: contain;
+}
+
+.visibility-none {
+  display: none;
+}

@@ -1,0 +1,85 @@
+<div class="search-filter-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput [(ngModel)]="searchText" placeholder="Search" />
+    <button mat-button matSuffix (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-button matPrefix [matMenuTriggerFor]="filterMenu">
+      <mat-icon>filter_list</mat-icon>
+      Filters
+    </button>
+  </mat-form-field>
+
+  <mat-menu #filterMenu="matMenu">
+    <div class="menu-group">
+      <h3>Sort by</h3>
+      <mat-radio-group
+        [(ngModel)]="selectedOption"
+        aria-label="Select an option"
+        [disabled]="isGuest"
+      >
+        <mat-radio-button (click)="$event.stopPropagation()" value="1"
+          >Number of applicants asc</mat-radio-button
+        >
+        <mat-radio-button (click)="$event.stopPropagation()" value="2"
+          >Number of applicants desc</mat-radio-button
+        >
+        <mat-radio-button (click)="$event.stopPropagation()" value="3"
+          >Creator rating</mat-radio-button
+        >
+        <mat-radio-button (click)="$event.stopPropagation()" value="4"
+          >Default</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="menu-group">
+      <h3>Upload date</h3>
+      <mat-checkbox
+        [(ngModel)]="filters.uploadToday"
+        (click)="$event.stopPropagation()"
+        [disabled]="isGuest"
+        >Today</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="filters.uploadThisWeek"
+        (click)="$event.stopPropagation()"
+        [disabled]="isGuest"
+        >This week</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="filters.uploadThisMonth"
+        (click)="$event.stopPropagation()"
+        [disabled]="isGuest"
+        >This month</mat-checkbox
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <div class="menu-group">
+      <h3>Article type</h3>
+      <mat-checkbox
+        [(ngModel)]="filters.articleBook"
+        (click)="$event.stopPropagation()"
+        [disabled]="isGuest"
+        >Book</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="filters.articlePaper"
+        (click)="$event.stopPropagation()"
+        [disabled]="isGuest"
+        >Paper</mat-checkbox
+      >
+      <mat-checkbox
+        [(ngModel)]="filters.articleProject"
+        (click)="$event.stopPropagation()"
+        [disabled]="isGuest"
+        >Project</mat-checkbox
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <button class="applyFilters" mat-button (click)="search()">
+      Apply Filters
+    </button>
+  </mat-menu>
+</div>

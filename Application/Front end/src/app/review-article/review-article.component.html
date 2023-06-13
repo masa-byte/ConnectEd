@@ -1,0 +1,156 @@
+<h1 mat-dialog-title>
+  {{
+    (articleType === "project" ? articleToReview?.name : articleToReview?.title)
+      | uppercase
+  }}
+</h1>
+<mat-dialog-content class="mat-typography dialog-content">
+  <div class="basic-info">
+    <div *ngIf="articleType === 'project'; else notProject">
+      <p><em>Name:</em> {{ articleToReview?.name }}</p>
+      <p><em>Project type:</em> {{ articleToReview?.type }}</p>
+      <p><em>Description:</em> {{ articleToReview?.description }}</p>
+      <mat-divider></mat-divider>
+    </div>
+    <ng-template #notProject>
+      <div>
+        <p><em>Title:</em> {{ articleToReview?.title }}</p>
+        <p><em>Topic:</em> {{ articleToReview?.topic }}</p>
+        <p><em>Description:</em> {{ articleToReview?.description }}</p>
+        <mat-divider></mat-divider>
+      </div>
+    </ng-template>
+  </div>
+  <div class="colleagues-table">
+    <div>
+      <mat-accordion>
+        <mat-expansion-panel
+          class="example-margin"
+          *ngFor="let applicant of applicants"
+          hideToggle
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <label class="example-name-label">{{
+                "Name: " + applicant?.profile?.name
+              }}</label>
+            </mat-panel-title>
+            <mat-panel-description class="applicant-info">
+              <label class="example-name-label">{{
+                "Grade: " + applicant.grade
+              }}</label>
+              <mat-slider
+                class="example-margin fontzilla"
+                required
+                [max]="5"
+                [min]="0"
+                [step]="1"
+                [showTickMarks]="true"
+                name="rating"
+                [(ngModel)]="applicant.grade"
+                ngDefaultControl
+              >
+                <input matSliderThumb />
+              </mat-slider>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="profile-row">
+            <span class="profile-label">Name:</span>
+            <span>{{ applicant.profile.name }}</span>
+          </div>
+          <div
+            class="profile-row"
+            *ngIf="facultyMemberTypeGuard(applicant.profile) as facultyMember"
+          >
+            <span class="profile-label">Surname:</span>
+            <span>{{ facultyMember.surname }}</span>
+          </div>
+          <div
+            class="profile-row"
+            *ngIf="studentTypeGuard(applicant.profile) as student"
+          >
+            <span class="profile-label">Surname:</span>
+            <span>{{ student.surname }}</span>
+          </div>
+          <div
+            class="profile-row"
+            *ngIf="facultyMemberTypeGuard(applicant.profile) as facultyMember"
+          >
+            <span class="profile-label">Username:</span>
+            <span>{{ facultyMember!.username }}</span>
+          </div>
+          <div
+            class="profile-row"
+            *ngIf="studentTypeGuard(applicant.profile) as student"
+          >
+            <span class="profile-label">Username:</span>
+            <span>{{ student.username }}</span>
+          </div>
+          <div class="profile-row">
+            <span class="profile-label">Description:</span>
+            <span>{{ applicant.profile.description }}</span>
+          </div>
+          <div
+            class="profile-row"
+            *ngIf="facultyMemberTypeGuard(applicant.profile) as facultyMember"
+          >
+            <span class="profile-label">Average rating</span>
+            <span *ngIf="facultyMember.gradeCount > 0">{{
+              facultyMember.gradeSum / facultyMember.gradeCount
+                | number : "1.2-2"
+            }}</span>
+          </div>
+          <div
+            class="profile-row"
+            *ngIf="studentTypeGuard(applicant.profile) as student"
+          >
+            <span class="profile-label">Average rating</span>
+            <span *ngIf="student.gradeCount > 0">{{
+              student.gradeSum / student.gradeCount | number : "1.2-2"
+            }}</span>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <!-- <mat-card class="example-margin" *ngFor="let applicant of applicants">
+        <mat-card-content class="applicant-info">
+          <div class="example-label-container">
+            <label id="example-name-label" class="example-name-label">{{
+              "Name: " + applicant?.profile?.name
+            }}</label>
+          </div>
+          <div>
+            <mat-slider
+              class="example-margin"
+              required
+              [max]="5"
+              [min]="0"
+              [step]="1"
+              [discrete]="true"
+              [showTickMarks]="true"
+              name="rating"
+              [(ngModel)]="applicant.grade"
+              ngDefaultControl
+            >
+              <input matSliderThumb />
+            </mat-slider>
+          </div>
+        </mat-card-content>
+      </mat-card> -->
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</mat-dialog-content>
+<div class="dialog-footer">
+  <mat-dialog-actions align="end">
+    <button class="end-button" mat-button mat-dialog-close>Cancel</button>
+    <button
+      class="end-button"
+      mat-button
+      [mat-dialog-close]="true"
+      (click)="finishReview()"
+      cdkFocusInitial
+    >
+      Finish
+    </button>
+  </mat-dialog-actions>
+</div>

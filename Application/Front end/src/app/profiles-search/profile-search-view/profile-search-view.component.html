@@ -1,0 +1,120 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      class="profile-picture"
+      *ngIf="typeOfProfileToDisplay !== 'faculty'"
+    >
+      <img [src]="svg" alt="Profile Image" />
+    </div>
+    <div
+      mat-card-avatar
+      class="profile-picture"
+      *ngIf="typeOfProfileToDisplay === 'faculty'"
+    >
+      <img src="../../../assets/facultyBackground.jpg" alt="Profile Image" />
+    </div>
+    <mat-card-title
+      appOnHoverDirective
+      class="cursor-pointer"
+      style="margin-bottom: 5px"
+      [hoverTextColor]="'#3f51b5'"
+      [underline]="true"
+      (click)="viewProfile()"
+      >{{ profileToDisplay?.name }}
+      {{ profileToDisplay?.surname }}</mat-card-title
+    >
+    <mat-card-subtitle>{{
+      typeOfProfileToDisplay | uppercase
+    }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div>
+      <div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay !== 'faculty'">
+          <span class="profile-label">Name:</span>
+          <span>{{ profileToDisplay!.name }}</span>
+        </div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay !== 'faculty'">
+          <span class="profile-label">Surname:</span>
+          <span>{{ profileToDisplay!.surname }}</span>
+        </div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay !== 'faculty'">
+          <span class="profile-label">Username:</span>
+          <span>{{ profileToDisplay!.username }}</span>
+        </div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay !== 'faculty'">
+          <span class="profile-label">Faculty:</span>
+          <span>{{ profileToDisplay!.faculty }}</span>
+        </div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay === 'student'">
+          <span class="profile-label">Degree Level:</span>
+          <span>{{ profileToDisplay!.degreeLevel }}</span>
+        </div>
+        <div
+          class="profile-row"
+          *ngIf="typeOfProfileToDisplay === 'facultyMember'"
+        >
+          <span class="profile-label">Academic Title:</span>
+          <span>{{ profileToDisplay!.academicTitle }}</span>
+        </div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay === 'faculty'">
+          <span class="profile-label">University:</span>
+          <span>{{ profileToDisplay!.university }}</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Description:</span>
+          <span>{{ profileToDisplay!.description }}</span>
+        </div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay !== 'faculty'">
+          <span class="profile-label">Experience:</span>
+          <span>{{ profileToDisplay!.experience }}</span>
+        </div>
+        <div class="profile-row" *ngIf="typeOfProfileToDisplay !== 'faculty'">
+          <span class="profile-label">Average rating</span>
+          <span>{{ averageRating | number : "1.2-2" }}</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Address:</span>
+          <span>{{ profileToDisplay!.address }}</span>
+        </div>
+        <div class="profile-row">
+          <span class="profile-label">Phone Number:</span>
+          <span>{{ profileToDisplay!.phoneNumber }}</span>
+        </div>
+      </div>
+      <div class="interests-section">
+        <h3>
+          {{ "Interests:" }}
+        </h3>
+        <ul class="interests-list">
+          <li *ngFor="let tag of tags">{{ tag.text }}</li>
+        </ul>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <section class="example-section">
+      <button
+        *ngIf="!isSubscribed"
+        [disabled]="isMe"
+        class="example-float-left"
+        mat-button
+        (click)="subscribeToUser()"
+      >
+        SUBSCRIBE
+      </button>
+      <button
+        *ngIf="isSubscribed"
+        [disabled]="isMe"
+        class="example-float-left"
+        mat-button
+        (click)="unsubscribeFromUser()"
+      >
+        UNSUBSCRIBE
+      </button>
+    </section>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,121 @@
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="'side'">
+    <mat-toolbar>Menu</mat-toolbar>
+    <div class="menu">
+      <div class="menu-items">
+        <mat-nav-list>
+          <a mat-list-item routerLink="homePage">Home Page</a>
+          <a mat-list-item routerLink="myArticles">My articles</a>
+          <a mat-list-item routerLink="myApplications">My applications</a>
+          <a mat-list-item routerLink="gradeColleagues">Grade colleagues</a>
+          <a mat-list-item routerLink="mySubscriptions">My subscriptions</a>
+          <a mat-list-item routerLink="searchProfiles">Explore profiles</a>
+        </mat-nav-list>
+      </div>
+      <div class="menu-checkbox">
+        <mat-checkbox
+          [(ngModel)]="backgroundStatus"
+          (change)="changeBackgroundStatus()"
+          >Disable background animation</mat-checkbox
+        >
+      </div>
+      <div class="profile-actions">
+        <mat-nav-list>
+          <a mat-list-item (click)="openProfile()">Profile</a>
+          <a mat-list-item (click)="signOut()">Sign out</a>
+        </mat-nav-list>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div class="left-group">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span
+          style="cursor: pointer"
+          appOnHoverDirective
+          (click)="openHomePage()"
+          [bold]="true"
+        >
+          ConnectEd
+        </span>
+      </div>
+      <div class="right-group">
+        <button mat-raised-button [matMenuTriggerFor]="menu">
+          + Add new article
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openProjectForm()">Add project</button>
+          <button
+            mat-menu-item
+            *ngIf="
+              typeOfProfile === 'student' || typeOfProfile === 'facultyMember'
+            "
+            (click)="openPaperForm()"
+          >
+            Add paper
+          </button>
+          <button
+            mat-menu-item
+            *ngIf="typeOfProfile === 'facultyMember'"
+            (click)="openBookForm()"
+          >
+            Add book
+          </button>
+        </mat-menu>
+        <button
+          mat-raised-button
+          class="btn"
+          aria-label="My articles"
+          (click)="openMyArticles()"
+        >
+          My articles
+        </button>
+        <button
+          mat-raised-button
+          class="btn"
+          aria-label="My applications"
+          (click)="openMyApplications()"
+        >
+          My applications
+        </button>
+        <button
+          mat-raised-button
+          class="btn"
+          aria-label="Grade colleagues"
+          (click)="openGradeColleagues()"
+        >
+          Grade colleagues
+        </button>
+        <button
+          mat-raised-button
+          class="btn"
+          aria-label="My subscriptions"
+          (click)="openMySubscriptions()"
+        >
+          My subscriptions
+        </button>
+        <button
+          type="button"
+          aria-label="Navigate to profile"
+          mat-icon-button
+          [matMenuTriggerFor]="profile"
+        >
+          <mat-icon aria-label="Profile icon">account_circle</mat-icon>
+        </button>
+        <mat-menu #profile="matMenu">
+          <button mat-menu-item (click)="openProfile()">Profile</button>
+          <button mat-menu-item (click)="signOut()">Sign out</button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

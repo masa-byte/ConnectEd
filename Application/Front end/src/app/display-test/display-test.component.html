@@ -1,0 +1,58 @@
+<div class="title" mat-dialog-title>
+  <h1 class="float-left">You're being tested</h1>
+  <h1 class="float-right">
+    <app-countdown-timer
+      [inputTimeInMinutes]="test.duration"
+    ></app-countdown-timer>
+  </h1>
+</div>
+<div mat-dialog-content class="content">
+  <form [formGroup]="questionFormGroup">
+    <div formArrayName="questions">
+      <div *ngFor="let question of questions.controls; let i = index">
+        <div [formGroupName]="i">
+          <mat-label class="questionLabel">Question {{ i + 1 }}</mat-label>
+          <mat-card class="example-card">
+            <mat-card-header class="example-header">
+              {{ test.questions[i].text }}
+            </mat-card-header>
+            <mat-card-content>
+              <mat-radio-group
+                aria-label="Select an option"
+                formControlName="answer"
+              >
+                <mat-radio-button name="answerOption" value="1">{{
+                  test.questions[i].answer1
+                }}</mat-radio-button
+                ><br />
+                <mat-radio-button name="answerOption" value="2">{{
+                  test.questions[i].answer2
+                }}</mat-radio-button
+                ><br />
+                <mat-radio-button name="answerOption" value="3">{{
+                  test.questions[i].answer3
+                }}</mat-radio-button
+                ><br />
+                <mat-radio-button name="answerOption" value="4">{{
+                  test.questions[i].answer4
+                }}</mat-radio-button
+                ><br />
+              </mat-radio-group>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close (click)="cancel()">Cancel</button>
+      <button
+        mat-button
+        [mat-dialog-close]="true"
+        (click)="submitTest()"
+        [disabled]="!questionFormGroup.valid"
+      >
+        Submit
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

@@ -1,0 +1,96 @@
+<mat-dialog-content>
+    <h4 class="dialog-header">Applicats are listed below (check the button to mark the application as accepted)</h4>
+    <div *ngIf="applicants$ | async as applicants">
+        <table mat-table *ngIf="applicants !== null" [dataSource]="applicants" multiTemplateDataRows class="mat-elevation-z8">
+            <ng-container matColumnDef="number">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.index+1}} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="phoneNumber">
+                <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.user.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.user.type|uppercase}} </td>
+            </ng-container>
+            <ng-container matColumnDef="accept">
+                <th mat-header-cell *matHeaderCellDef> Accept? </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <mat-checkbox  name="element.index" [(ngModel)]="element.selected" ></mat-checkbox>    
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="expand">
+                <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button aria-label="expand row"
+                        (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+                        <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+                        <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                    <div class="example-element-detail"
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="example-element-diagram">
+                            <div *ngIf="element.user.type==='faculty'" class="example-element-symbol">University:  {{element.university}} </div>
+                            <div *ngIf="element.user.type!=='faculty'" class="example-element-position">Surname:  {{element.surname}} </div>
+                            <div class="example-element-position"> Address: {{element.address}} </div>
+                            <div *ngIf="element.user.type!=='faculty'" class="example-element-position"> Faculty: {{element.faculty}} </div>
+                            <div *ngIf="element.user.type==='student'" class="example-element-position"> Degree Level: {{element.degreeLevel}} </div>
+                            <div *ngIf="element.user.type!=='faculty'" class="example-element-position"> Experience: {{element.experience}} </div>
+                            <div *ngIf="element.user.type==='facultyMember'" class="example-element-position"> Academic Title: {{element.academicTitle}} </div>
+                        </div>
+                        <div class="example-element-description">
+                            Description: <br />{{element.description}}
+                        </div>
+                        <div class="example-element-description">
+                            Tags:<br />
+                            <span *ngFor="let tag of element.tags" class="example-element-tag">
+                                {{tag.text}}
+                            </span>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+    </div>
+    <br />
+    <h4 class="dialog-header" *ngIf="applicants.length===0">There are no applicants yet!</h4>
+    <h4 class="dialog-header" *ngIf="applicants.length!==0">Pick a date and time here</h4>
+    <mat-form-field appearance="outline">
+        <mat-label>Choose a date for meeting (MM/DD/YYYY)</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date" #dateInput="ngModel" [disabled]="applicants.length==0">
+      
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Choose time (HH:MM AM/PM)</mat-label>
+        <input type="time" [(ngModel)]="time" matInput #timeInput="ngModel" name="week" min="09:00" max="18:00" value="6:30AM" [disabled]="applicants.length==0">
+     </mat-form-field>
+     <h6 class="dialog-header">*By clicking schedule button you will accept checked candidates and decline unckecked</h6>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close class="endButton" (click)="cancel()">Cancel</button>
+        <button mat-button color="primary" class="endButton" [mat-dialog-close]="true" (click)="schedule()" [disabled]="applicants.length==0">Schedule</button>
+    </mat-dialog-actions>
+</mat-dialog-content>

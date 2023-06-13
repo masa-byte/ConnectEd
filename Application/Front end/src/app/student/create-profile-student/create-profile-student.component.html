@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="main-div">
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="student.name"
+        required="true"
+        #nameInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Surname</mat-label>
+      <input
+        matInput
+        [(ngModel)]="student.surname"
+        required="true"
+        #surnameInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        [(ngModel)]="student.username"
+        required="true"
+        #usernameInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Address</mat-label>
+      <input
+        matInput
+        [(ngModel)]="student.address"
+        required="true"
+        #addressInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Phone number</mat-label>
+      <input
+        matInput
+        [(ngModel)]="student.phoneNumber"
+        required="true"
+        #phoneInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Faculty</mat-label>
+      <input
+        matInput
+        [(ngModel)]="student.faculty"
+        required="true"
+        #facultyInput="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Degree level</mat-label>
+      <mat-select
+        [(ngModel)]="student.degreeLevel"
+        required="true"
+        #degreeInput="ngModel"
+      >
+        <mat-option value="bachelor">Bachelor</mat-option>
+        <mat-option value="master">Master</mat-option>
+        <mat-option value="phd">PhD</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Experience</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="student.experience"
+        required="true"
+        #experienceInput="ngModel"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="field">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="student.description"
+        required="true"
+        #descriptionInput="ngModel"
+      ></textarea>
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-raised-button class="btn" (click)="back()">Back</button>
+      <button
+        mat-raised-button
+        class="btn"
+        (click)="saveProfile()"
+        [disabled]="
+          !nameInput.valid ||
+          !surnameInput.valid ||
+          !usernameInput.valid ||
+          !addressInput.valid ||
+          !phoneInput.valid ||
+          !facultyInput.valid ||
+          !degreeInput.valid ||
+          !experienceInput.valid ||
+          !descriptionInput.valid
+        "
+      >
+        {{ isEditing ? "Save Changes" : "Create Profile" }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-background-canvas></app-background-canvas>

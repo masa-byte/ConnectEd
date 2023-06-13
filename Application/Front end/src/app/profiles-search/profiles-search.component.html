@@ -1,0 +1,13 @@
+<app-search-bar></app-search-bar>
+<div *ngIf="profilesToDisplay as profiles" cols="2" rowHeight="2:1">
+  <div class="profile-container">
+    <div *ngFor="let profile of profiles" class="profile-column">
+      <app-profile-search-view
+        [profileToDisplay]="profile"
+      ></app-profile-search-view>
+    </div>
+  </div>
+</div>
+<app-background-canvas
+  *ngIf="backgroundService.getBackgroundStatus()"
+></app-background-canvas>

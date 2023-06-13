@@ -1,0 +1,27 @@
+.scrollable-container {
+  height: 100%;
+  width: 100%;
+  overflow-y: visible scroll;
+}
+
+.container {
+  display: flex;
+}
+
+.sticky {
+  position: sticky;
+  top: 20%;
+}
+
+.left-div {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.right-div {
+  flex: 2;
+}
+
+.follow-component {
+  margin: 0px;
+}

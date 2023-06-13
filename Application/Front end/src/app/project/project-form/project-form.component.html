@@ -1,0 +1,191 @@
+<div class="container">
+  <div class="main-div">
+    <mat-stepper orientation="vertical" [linear]="true" #stepper>
+      <mat-step [stepControl]="projectFormGroup">
+        <ng-template matStepLabel>Project info</ng-template>
+        <form [formGroup]="projectFormGroup">
+          <mat-form-field appearance="fill" class="field">
+            <input matInput formControlName="projectName" placeholder="Name" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="field">
+            <input matInput formControlName="projectType" placeholder="Type" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="field scrollable">
+            <textarea
+              matInput
+              formControlName="projectDescription"
+              placeholder="Description"
+            ></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="field">
+            <input
+              matInput
+              type="number"
+              formControlName="projectContributors"
+              placeholder="Number of contributors"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="field">
+            <input
+              matInput
+              type="number"
+              formControlName="projectDuration"
+              placeholder="Expected duration in days"
+            />
+          </mat-form-field>
+          <section class="example-section">
+            <mat-slide-toggle
+              class="example-margin"
+              (change)="toggleTest($event)"
+              formControlName="testEnabled"
+              appearance="fill"
+              class="field"
+              >Test</mat-slide-toggle
+            >
+          </section>
+          <mat-form-field appearance="fill" class="field">
+            <mat-label>Duration of test in minutes</mat-label>
+            <input type="number" formControlName="testDuration" matInput />
+          </mat-form-field>
+          <div>
+            <button
+              mat-button
+              color="basic"
+              style="float: right"
+              type="button"
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step *ngIf="hasTest" [stepControl]="questionFormGroup">
+        <form [formGroup]="questionFormGroup">
+          <ng-template matStepLabel>Add questions</ng-template>
+          <div formArrayName="questions">
+            <div *ngFor="let question of questions.controls; let i = index">
+              <div [formGroupName]="i">
+                <h2 style="margin-top: 10px">Question {{ i + 1 }}</h2>
+                <mat-form-field appearance="fill" class="field">
+                  <input matInput formControlName="text" placeholder="Text" />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="field">
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="points"
+                    placeholder="Points"
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="field">
+                  <input
+                    matInput
+                    formControlName="answer1"
+                    placeholder="Answer 1"
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="field">
+                  <input
+                    matInput
+                    formControlName="answer2"
+                    placeholder="Answer 2"
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="field">
+                  <input
+                    matInput
+                    formControlName="answer3"
+                    placeholder="Answer 3"
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="field">
+                  <input
+                    matInput
+                    formControlName="answer4"
+                    placeholder="Answer 4"
+                  />
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="field">
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="correctAnswerIndex"
+                    placeholder="Correct answer"
+                  />
+                </mat-form-field>
+                <div>
+                  <button mat-button class="btn" (click)="removeQuestion(i)">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="add-question-btn">
+              <div class="center-container">
+                <button
+                  mat-fab
+                  type="button"
+                  color="basic"
+                  (click)="addQuestion()"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              mat-button
+              color="basic"
+              style="float: right"
+              type="button"
+              matStepperNext
+            >
+              Next
+            </button>
+            <button
+              mat-button
+              color="basic"
+              style="float: left"
+              type="button"
+              matStepperPrevious
+            >
+              Back
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div style="margin: 30px">
+          <h2 style="text-align: center">Your project is ready!</h2>
+          <div>
+            <button
+              mat-button
+              color="basic"
+              style="float: left; margin-bottom: 20px"
+              type="button"
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              style="float: right; margin-bottom: 20px"
+              type="submit"
+              (click)="saveProject()"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
+
+<app-background-canvas
+  *ngIf="backgroundService.getBackgroundStatus()"
+></app-background-canvas>
